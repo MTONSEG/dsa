@@ -34,12 +34,12 @@ let alphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
 class Queue {
     constructor(maxPersons) {
         this.maxPersons = maxPersons;
-        this.queue = [];
-        this.front = -1;
-        this.rear = -1;
         this.peak = () => (this.front >= 0) ? this.queue[this.front] : 'This queue is empty';
         this.isFull = () => this.rear == this.maxPersons - 1;
         this.isEmpty = () => this.front == -1;
+        this.queue = [];
+        this.front = -1;
+        this.rear = -1;
     }
     ;
     enqueue(person) {
@@ -119,7 +119,6 @@ class CircularQueue {
                 this.front = 0;
             this.rear = (this.rear + 1) % this.size;
             this.storage[this.rear] = elem;
-            console.log(this.front, this.rear);
             console.log(this.getStorage());
         }
     }
@@ -129,13 +128,11 @@ class CircularQueue {
         else {
             let elem = this.storage[this.front];
             this.storage[this.front] = null;
-            console.log(this.front, this.rear);
             if (this.front == this.rear)
                 this.restartValues();
             else {
                 this.front = (this.front + 1) % this.size;
             }
-            // console.log(this.front, this.rear);
             console.log(this.getStorage());
             return elem;
         }
@@ -149,20 +146,68 @@ class CircularQueue {
 let circularQueue = new CircularQueue(5);
 for (let item of alphabet)
     circularQueue.enqueue(item);
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.enqueue('A');
-circularQueue.enqueue('B');
-circularQueue.enqueue('C');
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.enqueue('A');
-circularQueue.enqueue('B');
-circularQueue.enqueue('B');
-circularQueue.enqueue('B');
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.enqueue('A');
+// circularQueue.enqueue('B');
+// circularQueue.enqueue('C');
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.enqueue('A');
+// circularQueue.enqueue('B');
+// circularQueue.enqueue('C');
+// circularQueue.enqueue('D');
+class PriorityQueue extends Queue {
+    enqueue(person) {
+        let data = this.queue;
+        if (this.isFull()) {
+            console.log('This queue is full');
+        }
+        else {
+            if (data.length > 0) {
+                this.handleEnqueue(person, data);
+            }
+            else {
+                if (this.front = -1) {
+                    this.front = 0;
+                }
+                data.push(person);
+            }
+            this.rear++;
+            console.log(data);
+        }
+    }
+    handleEnqueue(person, data) {
+        for (let i = 0; i < data.length; i++) {
+            if (person.id >= data[i].id) {
+                if (data[i + 1] == undefined) {
+                    data.push(person);
+                    break;
+                }
+                else
+                    continue;
+            }
+            else {
+                data.splice(i, 0, person);
+                break;
+            }
+        }
+    }
+}
+let priorityQueue = new PriorityQueue(5);
+priorityQueue.enqueue(persons[0]);
+priorityQueue.enqueue(persons[1]);
+priorityQueue.enqueue(persons[0]);
+priorityQueue.enqueue(persons[3]);
+priorityQueue.enqueue(persons[4]);
+priorityQueue.enqueue(persons[2]);
+priorityQueue.dequeue();
+priorityQueue.dequeue();
+priorityQueue.dequeue();
+priorityQueue.dequeue();
 //# sourceMappingURL=app.js.map

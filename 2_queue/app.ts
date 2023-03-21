@@ -39,11 +39,15 @@ let persons: Person[] = [
 let alphabet: string[] = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 class Queue {
-	private queue: Person[] = [];
-	private front: number = -1;
-	private rear: number = -1;
+	protected queue: Person[];
+	protected front: number;
+	protected rear: number;
 
-	constructor(private maxPersons: number) { };
+	constructor(private maxPersons: number) {
+		this.queue = [];
+		this.front = -1;
+		this.rear = -1;
+	};
 
 	peak = (): Person | string => (this.front >= 0) ? this.queue[this.front] : 'This queue is empty';
 
@@ -75,9 +79,9 @@ class Queue {
 
 	}
 
-	private isFull = (): boolean => this.rear == this.maxPersons - 1;
+	protected isFull = (): boolean => this.rear == this.maxPersons - 1;
 
-	private isEmpty = (): boolean => this.front == -1;
+	protected isEmpty = (): boolean => this.front == -1;
 }
 
 
@@ -141,7 +145,7 @@ class CircularQueue {
 			this.rear = (this.rear + 1) % this.size;
 
 			this.storage[this.rear] = elem;
-			
+
 			console.log(this.getStorage());
 		}
 	}
@@ -189,22 +193,88 @@ let circularQueue = new CircularQueue(5);
 
 for (let item of alphabet) circularQueue.enqueue(item);
 
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
-circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
 
-circularQueue.enqueue('A');
-circularQueue.enqueue('B');
-circularQueue.enqueue('C');
+// circularQueue.enqueue('A');
+// circularQueue.enqueue('B');
+// circularQueue.enqueue('C');
 
-circularQueue.dequeue();
-circularQueue.dequeue();
+// circularQueue.dequeue();
+// circularQueue.dequeue();
 
-circularQueue.enqueue('A');
-circularQueue.enqueue('B');
-circularQueue.enqueue('C');
-circularQueue.enqueue('D');
+// circularQueue.enqueue('A');
+// circularQueue.enqueue('B');
+// circularQueue.enqueue('C');
+// circularQueue.enqueue('D');
+
+
+class PriorityQueue extends Queue {
+
+	enqueue(person: Person): void {
+		let data: Person[] = this.queue;
+
+		if (this.isFull()) {
+			console.log('This queue is full');
+		} else {
+
+			if (data.length > 0) {
+
+				this.handleEnqueue(person, data);
+
+			} else {
+
+				if (this.front = -1) { this.front = 0 }
+
+				data.push(person);
+
+			}
+
+			this.rear++;
+
+			console.log(data);
+		}
+	}
+
+	private handleEnqueue(person: Person, data: Person[]): void {
+		for (let i: number = 0; i < data.length; i++) {
+			if (person.id >= data[i].id) {
+
+				if (data[i + 1] == undefined) {
+					data.push(person);
+					break;
+				}
+				else continue;
+
+			} else {
+
+				data.splice(i, 0, person);
+				break;
+
+			}
+		}
+	}
+}
+
+let priorityQueue = new PriorityQueue(5);
+
+priorityQueue.enqueue(persons[0]);
+priorityQueue.enqueue(persons[1]);
+priorityQueue.enqueue(persons[0]);
+priorityQueue.enqueue(persons[3]);
+priorityQueue.enqueue(persons[4]);
+priorityQueue.enqueue(persons[2]);
+
+
+priorityQueue.dequeue();
+
+priorityQueue.dequeue();
+
+priorityQueue.dequeue();
+
+priorityQueue.dequeue();
