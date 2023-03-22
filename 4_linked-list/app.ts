@@ -1,122 +1,154 @@
-class NodeItem<T> {
-	constructor(
-		private data: T,
-		private next: NodeItem<T> | null = null
-	) { }
 
-	getData = (): T => this.data;
-	setNext = (elem: NodeItem<T>) => { this.next = elem };
-	getNext = (): NodeItem<T> => this.next;
-}
+// Однонаправленный список
+const SinglyLinkedList = (): void => {
 
+	class NodeItem<T> {
+		constructor(
+			private data: T,
+			private next: NodeItem<T> | null = null
+		) { }
 
-class LinkedList<T> {
-	private length: number = 0;
-
-	constructor(
-		private head: NodeItem<T> | null = null,
-		private tail: NodeItem<T> | null = null
-	) { }
-
-	append(data: T): void {
-		const node = new NodeItem(data);
-
-		if (this.tail) this.tail.setNext(node);
-
-		this.tail = node;
-
-		if (!this.head) this.head = node;
-
-		this.length++;
+		getData = (): T => this.data;
+		setNext = (elem: NodeItem<T>) => { this.next = elem };
+		getNext = (): NodeItem<T> => this.next;
 	}
 
-	prepend(data: T): void {
-		const node = new NodeItem(data, this.head);
 
-		this.head = node;
+	class LinkedList<T> {
+		private length: number = 0;
 
-		if (!this.tail) this.tail = node;
+		constructor(
+			private head: NodeItem<T> | null = null,
+			private tail: NodeItem<T> | null = null
+		) { }
 
-		this.length++;
-	}
+		append(data: T): void {
+			const node = new NodeItem(data);
 
-	insertAfter(data: T, after: T): void {
-		const found = this.find(after);
+			if (this.tail) this.tail.setNext(node);
 
-		if (!found) console.log('This elem is not defined');
-		else {
-			found.setNext(new NodeItem(data, found.getNext()));
+			this.tail = node;
+
+			if (!this.head) this.head = node;
+
+			this.length++;
 		}
 
-		this.length++;
-	}
+		prepend(data: T): void {
+			const node = new NodeItem(data, this.head);
 
-	remove(data: T) {
-		if (!this.head) console.log('This list is empty');
-		else {
-			let current: NodeItem<T> = this.head;
+			this.head = node;
 
-			while (this.head && this.head.getData() === data) {
-				this.head = this.head.getNext();
-			}
+			if (!this.tail) this.tail = node;
 
-			while (current.getNext()) {
-
-				if (current.getNext().getData() === data) {
-					current.getNext().setNext(current.getNext().getNext());
-				} else {
-					current = current.getNext()
-				}
-			}
-
-			this.length--;
+			this.length++;
 		}
-	}
 
-	find(data: T): NodeItem<T> {
-		if (!this.head) console.log('This list is empty');
-		else {
-			let current: NodeItem<T> = this.head;
+		insertAfter(data: T, after: T): void {
+			const found = this.find(after);
 
-			while (current) {
+			if (!found) console.log('This elem is not defined');
+			else {
+				found.setNext(new NodeItem(data, found.getNext()));
+			}
 
-				if (data === current.getData()) {
-					return current;
+			this.length++;
+		}
+
+		remove(data: T): void {
+			if (!this.head) console.log('This list is empty');
+			else {
+				if (this.head.getData() === data) {
+					let next: NodeItem<T> = this.head.getNext();
+
+					this.head.setNext(null);
+
+					this.head = next;
+
+					this.length--;
+
+					console.log(`Removed is - ${this.head.getData()}`);
 				}
 
-				current = current.getNext();
+				let length: number = this.length;
+				let current: NodeItem<T> = this.head;
+
+				while (current.getNext()) {
+					let nextEl: NodeItem<T> = current.getNext();
+
+					if (nextEl.getData() === data) {
+						current.setNext(nextEl.getNext());
+
+						this.length--;
+					}
+
+					current = nextEl;
+
+					if (this.length !== length) console.log(`Removed - ${nextEl.getData()}`);
+				}
 			}
 		}
-	}
 
-	toArray(): NodeItem<T>[] {
-		if (!this.head) console.log('This list is empty');
-		else {
-			let list: NodeItem<T>[] = [];
-			let current: NodeItem<T> | null = this.head;
+		find(data: T): NodeItem<T> {
+			if (!this.head) console.log('This list is empty');
+			else {
+				let current: NodeItem<T> = this.head;
+				let count: number = 0;
 
-			while (current) {
-				list.push(current);
+				while (current) {
 
-				current = current.getNext();
+					if (data === current.getData()) {
+						return current;
+					}
+
+					current = current.getNext();
+				}
+
+				// if (count === 0) console.log(`This ${data} is not defined`);
 			}
-
-			return list;
 		}
+
+		toArray(): NodeItem<T>[] {
+			if (!this.head) console.log('This list is empty');
+			else {
+				let list: NodeItem<T>[] = [];
+				let current: NodeItem<T> | null = this.head;
+
+				while (current) {
+					list.push(current);
+
+					current = current.getNext();
+				}
+
+				return list;
+			}
+		}
+
+		getLength = (): number => this.length;
 	}
+
+	const list = new LinkedList();
+
+	list.append(10);
+	list.append(20);
+	list.append(40);
+	list.append(50);
+	list.prepend(0);
+	list.insertAfter(30, 20);
+
+	let arr = list.toArray();
+	console.log(arr);
+
+	console.log(list.getLength())
+
+	list.remove(50);
+
+	console.log(list.getLength())
+
+	arr = list.toArray();
+	console.log(arr);
 }
 
-const list = new LinkedList();
+SinglyLinkedList();
 
-list.append('Hello, World');
-list.append('Second');
-list.prepend('Third');
-list.append(24);
 
-let arr = list.toArray();
-
-console.log(arr);
-
-list.remove(24);
-
-console.log(list.toArray());
