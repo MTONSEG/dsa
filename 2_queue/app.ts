@@ -193,25 +193,25 @@ let circularQueue = new CircularQueue(5);
 
 for (let item of alphabet) circularQueue.enqueue(item);
 
-// circularQueue.dequeue();
-// circularQueue.dequeue();
-// circularQueue.dequeue();
-// circularQueue.dequeue();
-// circularQueue.dequeue();
-// circularQueue.dequeue();
-// circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
 
-// circularQueue.enqueue('A');
-// circularQueue.enqueue('B');
-// circularQueue.enqueue('C');
+circularQueue.enqueue('A');
+circularQueue.enqueue('B');
+circularQueue.enqueue('C');
 
-// circularQueue.dequeue();
-// circularQueue.dequeue();
+circularQueue.dequeue();
+circularQueue.dequeue();
 
-// circularQueue.enqueue('A');
-// circularQueue.enqueue('B');
-// circularQueue.enqueue('C');
-// circularQueue.enqueue('D');
+circularQueue.enqueue('A');
+circularQueue.enqueue('B');
+circularQueue.enqueue('C');
+circularQueue.enqueue('D');
 
 
 class PriorityQueue extends Queue {

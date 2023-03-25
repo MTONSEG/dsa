@@ -43,44 +43,44 @@ class Stack {
 
 const stack = new Stack(5);
 
-// stack.add('site.ua');
-// console.log(stack.peek());
+stack.add('site.ua');
+console.log(stack.peek());
 
-// stack.add('facebook.com');
-// console.log(stack.peek());
+stack.add('facebook.com');
+console.log(stack.peek());
 
-// stack.add('youtube.com');
-// console.log(stack.peek());
+stack.add('youtube.com');
+console.log(stack.peek());
 
-// stack.add('instagram.com');
-// console.log(stack.peek());
+stack.add('instagram.com');
+console.log(stack.peek());
 
-// stack.add('figma.com');
-// console.log(stack.peek());
+stack.add('figma.com');
+console.log(stack.peek());
 
-// stack.add('google.com');
-// console.log(stack.peek());
+stack.add('google.com');
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
-// stack.remove();
-// console.log(stack.peek());
+stack.remove();
+console.log(stack.peek());
 
 
 
