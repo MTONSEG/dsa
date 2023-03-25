@@ -1,30 +1,30 @@
-class Parking4 {
+class Parking2 {
     constructor() {
-        this.state = new Map();
+        this.state = [];
     }
-    go(str, owner) {
+    go(str, index) {
         str = str.toLowerCase();
-        if (str === 'список' || str === 'автомобили')
-            return this.state.keys();
-        if (str === 'владельцы')
-            return this.state.values();
+        let size = this.state.length;
+        if (str === 'список')
+            return this.state;
         if (str === 'стоп') {
             console.log('APP IS STOPPED');
             return;
         }
-        if (owner)
-            this.state.set(str, owner);
-        else {
-            console.log('Please, enter owner');
+        if (index) {
+            if (index > size) {
+                this.state.push(str);
+            }
+            else {
+                index--;
+                this.state.splice(index, 0, str);
+            }
         }
     }
 }
-const parking4 = new Parking4();
-parking4.go('ae1111im', 'Jack');
-parking4.go('ae2222im', 'Simon');
-parking4.go('ae2222im', 'Low');
-parking4.go('ae3333im', 'Jonson');
-console.log(parking4.go('список'));
-console.log(parking4.go('владельцы'));
-console.log(parking4.go('автомобили'));
+let parking2 = new Parking2();
+parking2.go('ae1111im', 3);
+parking2.go('ae2222im', 2);
+parking2.go('ae3333im', 1);
+console.log(parking2.go('список'));
 //# sourceMappingURL=app.js.map
