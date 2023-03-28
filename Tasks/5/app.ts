@@ -3,15 +3,16 @@ class List {
 
 	insertRear(num: number) {
 		this.storage.push(num);
-		console.log('Complete!');
 	}
 
 	insertFront(num: number) {
+		console.log(this.getTime());
 		this.storage.unshift(num);
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	insertCenter(num: number, index?: number) {
+		console.log(this.getTime());
 		let centerIndex: number = Math.floor(this.storage.length / 2);
 
 		if (index) {
@@ -19,30 +20,33 @@ class List {
 		} else {
 			this.storage.splice(centerIndex, 1, num);
 		}
-
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	delRear(): void {
+		console.log(this.getTime());
 		this.storage.pop();
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	delFront(): void {
+		console.log(this.getTime());
 		this.storage.splice(0, 1);
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	delCenter(): void {
+		console.log(this.getTime());
 		let index: number = Math.floor(this.storage.length / 2);
 
 		if (index > 0) {
 			this.storage.splice(index, 1);
 		}
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	getFront(): number {
+		console.log(this.getTime());
 		return this.storage[0];
 	}
 
@@ -52,14 +56,24 @@ class List {
 
 	getCenter(): number {
 		let index: number = Math.floor(this.storage.length / 2);
-
 		return this.storage[index];
 	}
 
 	fill(amount: number) {
+		console.log(this.getTime());
+
 		for (let i: number = 1; i <= amount; i++) {
 			this.insertRear(i);
 		}
+
+		console.log(this.getTime());
+	}
+
+	getStorage = (): number[] => this.storage;
+
+	getTime(): string {
+		let date = new Date();
+		return `${date.getMinutes()}:${date.getSeconds()}`;
 	}
 }
 
@@ -97,6 +111,7 @@ class LinkedList<T> {
 	}
 
 	prepend(data: T): void {
+		console.log(this.getTime());
 		const node = new NodeItem(data, this.head);
 
 		this.head = node;
@@ -104,10 +119,11 @@ class LinkedList<T> {
 		if (!this.tail) this.tail = node;
 
 		this.length++;
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	insertAfter(data: T, after: T): void {
+		console.log(this.getTime());
 		const found = this.find(after);
 
 		if (!found) console.log('This elem is not defined');
@@ -116,10 +132,11 @@ class LinkedList<T> {
 		}
 
 		this.length++;
-		console.log('Complete!');
+		console.log(this.getTime());
 	}
 
 	remove(data: T): void {
+		console.log(this.getTime());
 		if (!this.head) console.log('This list is empty');
 		else {
 			if (this.head.getData() === data) {
@@ -151,6 +168,7 @@ class LinkedList<T> {
 				if (this.length !== length) console.log(`Removed - ${nextEl.getData()}`);
 			}
 		}
+		console.log(this.getTime());
 	}
 
 	find(data: T): NodeItem<T> {
@@ -167,8 +185,6 @@ class LinkedList<T> {
 
 				current = current.getNext();
 			}
-
-			// if (count === 0) console.log(`This ${data} is not defined`);
 		}
 	}
 
@@ -189,17 +205,19 @@ class LinkedList<T> {
 	}
 
 	getLength = (): number => this.length;
+
+	getTime(): string {
+		let date = new Date();
+		return `${date.getMinutes()}:${date.getSeconds()}`;
+	}
 }
 
 const list = new List();
 const linkedList = new LinkedList();
 
-list.fill(1000);
+list.fill(10000000);
+console.log(list.getStorage());
 list.insertFront(45);
+console.log(list.getStorage());
 list.insertCenter(45);
-
-console.log(list);
-
-for (let i: number = 1; i < 1000000; i++) {
-	linkedList.append(i);
-}
+console.log(list.getStorage());

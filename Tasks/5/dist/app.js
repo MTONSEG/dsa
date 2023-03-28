@@ -1,16 +1,18 @@
 class List {
     constructor() {
         this.storage = [];
+        this.getStorage = () => this.storage;
     }
     insertRear(num) {
         this.storage.push(num);
-        console.log('Complete!');
     }
     insertFront(num) {
+        console.log(this.getTime());
         this.storage.unshift(num);
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     insertCenter(num, index) {
+        console.log(this.getTime());
         let centerIndex = Math.floor(this.storage.length / 2);
         if (index) {
             this.storage.splice(index, 1, num);
@@ -18,24 +20,28 @@ class List {
         else {
             this.storage.splice(centerIndex, 1, num);
         }
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     delRear() {
+        console.log(this.getTime());
         this.storage.pop();
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     delFront() {
+        console.log(this.getTime());
         this.storage.splice(0, 1);
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     delCenter() {
+        console.log(this.getTime());
         let index = Math.floor(this.storage.length / 2);
         if (index > 0) {
             this.storage.splice(index, 1);
         }
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     getFront() {
+        console.log(this.getTime());
         return this.storage[0];
     }
     getRear() {
@@ -46,9 +52,15 @@ class List {
         return this.storage[index];
     }
     fill(amount) {
+        console.log(this.getTime());
         for (let i = 1; i <= amount; i++) {
             this.insertRear(i);
         }
+        console.log(this.getTime());
+    }
+    getTime() {
+        let date = new Date();
+        return `${date.getMinutes()}:${date.getSeconds()}`;
     }
 }
 class NodeItem {
@@ -75,6 +87,7 @@ class LinkedList {
         if (!this.head)
             this.head = node;
         this.length++;
+        console.log('Complete!');
     }
     prepend(data) {
         const node = new NodeItem(data, this.head);
@@ -82,6 +95,7 @@ class LinkedList {
         if (!this.tail)
             this.tail = node;
         this.length++;
+        console.log('Complete!');
     }
     insertAfter(data, after) {
         const found = this.find(after);
@@ -91,6 +105,7 @@ class LinkedList {
             found.setNext(new NodeItem(data, found.getNext()));
         }
         this.length++;
+        console.log('Complete!');
     }
     remove(data) {
         if (!this.head)
@@ -148,11 +163,10 @@ class LinkedList {
 }
 const list = new List();
 const linkedList = new LinkedList();
-list.fill(1000);
+list.fill(10000000);
+console.log(list.getStorage());
 list.insertFront(45);
+console.log(list.getStorage());
 list.insertCenter(45);
-console.log(list);
-for (let i = 1; i < 1000000; i++) {
-    linkedList.append(i);
-}
+console.log(list.getStorage());
 //# sourceMappingURL=app.js.map
