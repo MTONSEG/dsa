@@ -122,13 +122,13 @@ class MaxHeep {
 		}
 	}
 
-	sort(): void {
-		let size: number = this.heep.length;
+	// sort(): void {
+	// 	let size: number = this.heep.length;
 
-		for (let i: number = 0; i < size; i++) {
-			this.sorted.push(this.delete());
-		}
-	}
+	// 	for (let i: number = 0; i < size; i++) {
+	// 		this.sorted.push(this.delete());
+	// 	}
+	// }
 
 	getHeep = (): number[] => this.heep;
 
@@ -153,10 +153,6 @@ let arr: number[] = [34, 22, 1, 2, 3434, 23, 43, 58];
 
 heep.fill(arr);
 
-
 console.log(heep);
-
-heep.sort();
-
 
 console.log(heep);
