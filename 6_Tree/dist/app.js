@@ -44,7 +44,6 @@ class BinaryTree {
         }
     }
     find(num) {
-        let count = 0;
         if (!this.root)
             console.log('This tree is Empty');
         else {
@@ -52,7 +51,6 @@ class BinaryTree {
             while (current) {
                 if (current.getValue() === num) {
                     console.log('Wow! This num is found!');
-                    console.log(count);
                     return num;
                 }
                 if (num < current.getValue()) {
@@ -61,7 +59,6 @@ class BinaryTree {
                 else {
                     current = current.getRight();
                 }
-                count++;
             }
             if (!current) {
                 console.log('This num is not defined');

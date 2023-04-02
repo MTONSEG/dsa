@@ -1,4 +1,4 @@
-class HeepMin {
+class Heep {
 	private storage: number[] = [];
 	private sorted: number[] = [];
 
@@ -77,7 +77,7 @@ class HeepMin {
 	}
 }
 
-let heepMin = new HeepMin(7);
+let heepMin = new Heep(4);
 
 heepMin.sort();
 

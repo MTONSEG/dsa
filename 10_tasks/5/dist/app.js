@@ -90,14 +90,16 @@ class LinkedList {
         console.log('Complete!');
     }
     prepend(data) {
+        console.log(this.getTime());
         const node = new NodeItem(data, this.head);
         this.head = node;
         if (!this.tail)
             this.tail = node;
         this.length++;
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     insertAfter(data, after) {
+        console.log(this.getTime());
         const found = this.find(after);
         if (!found)
             console.log('This elem is not defined');
@@ -105,9 +107,10 @@ class LinkedList {
             found.setNext(new NodeItem(data, found.getNext()));
         }
         this.length++;
-        console.log('Complete!');
+        console.log(this.getTime());
     }
     remove(data) {
+        console.log(this.getTime());
         if (!this.head)
             console.log('This list is empty');
         else {
@@ -131,6 +134,7 @@ class LinkedList {
                     console.log(`Removed - ${nextEl.getData()}`);
             }
         }
+        console.log(this.getTime());
     }
     find(data) {
         if (!this.head)
@@ -144,7 +148,6 @@ class LinkedList {
                 }
                 current = current.getNext();
             }
-            // if (count === 0) console.log(`This ${data} is not defined`);
         }
     }
     toArray() {
@@ -159,6 +162,10 @@ class LinkedList {
             }
             return list;
         }
+    }
+    getTime() {
+        let date = new Date();
+        return `${date.getMinutes()}:${date.getSeconds()}`;
     }
 }
 const list = new List();

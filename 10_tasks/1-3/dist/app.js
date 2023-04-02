@@ -29,7 +29,7 @@ class Console {
     input(number, car) {
         let isList = number.toLowerCase() === 'список';
         if (car)
-            car = car[0].toUpperCase() + car.slice(1).toLowerCase();
+            this.handleCarName(car);
         if (isList) {
             console.log(this.parking.toArray());
         }
@@ -37,6 +37,9 @@ class Console {
             this.parking.addCar(number, car);
             console.log(this.parking.toArray());
         }
+    }
+    handleCarName(car) {
+        car = car[0].toUpperCase() + car.slice(1).toLowerCase();
     }
 }
 class Console2 extends Console {
@@ -49,7 +52,7 @@ class Console2 extends Console {
         console.log(this.parking.toArray());
     }
 }
-class Console3 extends Console {
+class Console3 extends Console2 {
     input(number, car) {
         for (let elem of this.parking.getState()) {
             elem.number = elem.number.toLowerCase();

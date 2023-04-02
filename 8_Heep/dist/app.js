@@ -1,4 +1,4 @@
-class HeepMin {
+class Heep {
     constructor(num) {
         this.storage = [];
         this.sorted = [];
@@ -63,12 +63,7 @@ class HeepMin {
         arr[index2] = tmp;
     }
 }
-let heepMin = new HeepMin(7);
-// heepMin.addSort(heepMin.remove());
-// heepMin.addSort(heepMin.remove());
-// heepMin.addSort(heepMin.remove());
-// heepMin.addSort(heepMin.remove());
-// heepMin.addSort(heepMin.remove());
+let heepMin = new Heep(4);
 heepMin.sort();
 console.log('End');
 //# sourceMappingURL=app.js.map

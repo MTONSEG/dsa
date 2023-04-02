@@ -38,7 +38,7 @@ class Console {
 	input(number: string, car?: string): void {
 		let isList: boolean = number.toLowerCase() === 'список';
 
-		if (car) car = car[0].toUpperCase() + car.slice(1).toLowerCase();
+		if (car) this.handleCarName(car);
 
 		if (isList) {
 			console.log(this.parking.toArray())
@@ -46,6 +46,10 @@ class Console {
 			this.parking.addCar(number, car);
 			console.log(this.parking.toArray())
 		}
+	}
+
+	private handleCarName(car: string) {
+		car = car[0].toUpperCase() + car.slice(1).toLowerCase();
 	}
 }
 
@@ -61,7 +65,7 @@ class Console2 extends Console {
 	}
 }
 
-class Console3 extends Console {
+class Console3 extends Console2 {
 	input(number: string, car?: string) {
 		for (let elem of this.parking.getState()) {
 			elem.number = elem.number.toLowerCase();

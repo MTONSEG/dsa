@@ -302,26 +302,26 @@ class Main {
 	}
 }
 
-const main = new Main(50000);
+const main = new Main(40000);
 
 let storage: number[] = main.getData();
 
 main.bubbleSort();
-main.fill(50000);
+main.fill(40000);
 
 main.quickSort();
-main.fill(50000);
+main.fill(40000);
 
 main.selectionSort();
-main.fill(50000);
+main.fill(40000);
 
 main.insertSort();
-main.fill(50000);
+main.fill(40000);
 
 main.mergeSort();
-main.fill(50000);
+main.fill(40000);
 
 main.shellSort();
-main.fill(50000);
+main.fill(40000);
 
 console.log('End');
