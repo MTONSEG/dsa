@@ -75,3 +75,7 @@ graph.removeEdge('Mike', 'Alex');
 graph.removeEdge('Jack', 'Alex');
 
 console.log(graph);
+
+
+let test = Array(3);
+console.log(test)

@@ -8,21 +8,26 @@
 // 	finish: {}
 // };
 
+type AdjList = {
+	[key: string]: { [key: string]: number }
+}
 
-class Graph {
+type DistanceList = { [key: string]: number };
+
+class Navigate {
 	private cities: string[] = [];
-	private adjList: { [key: string]: { [key: string]: number } } = {};
+	private adjList: AdjList = {};
 
 	constructor() {
 		let cities = { o: 'Odessa', n: 'Nikolaev', kr: 'KrivoiRog', u: 'Uman', k: 'Kyiv', p: 'Poltava', dp: 'Dnepr', };
 
-		this.addVertex(cities.o);
-		this.addVertex(cities.n);
-		this.addVertex(cities.kr);
-		this.addVertex(cities.u);
-		this.addVertex(cities.k);
-		this.addVertex(cities.p);
-		this.addVertex(cities.dp);
+		this.addCity(cities.o);
+		this.addCity(cities.n);
+		this.addCity(cities.kr);
+		this.addCity(cities.u);
+		this.addCity(cities.k);
+		this.addCity(cities.p);
+		this.addCity(cities.dp);
 
 		this.addEdge(cities.o, cities.n, 132);
 		this.addEdge(cities.o, cities.u, 271);
@@ -35,56 +40,61 @@ class Graph {
 		this.addEdge(cities.p, cities.dp, 187);
 	}
 
-	addVertex(vertex: string): void {
-		this.cities.push(vertex);
-		this.adjList[vertex] = {};
+	addCity(city: string): void {
+		if (this.cities.includes(city)) {
+			console.log(`${city} is already exist`);
+		}
+
+		this.cities.push(city);
+		this.adjList[city] = {};
 	}
 
-	addEdge(vert1: string, vert2: string, weight: number): void {
-		this.adjList[vert1][vert2] = weight;
+	addEdge(city1: string, city2: string, weight: number): void {
+		this.adjList[city1][city2] = weight;
 	}
+
 
 	findPath(to: string, from: string = 'Odessa'): void {
-		let distances: { [key: string]: number } = {};
+		let distanceList: DistanceList = {};
 		let visited = new Set<string>();
 
 		for (let i = 0; i < this.cities.length; i++) {
 			if (this.cities[i] === from) {
-				distances[from] = 0;
+				distanceList[from] = 0;
 			} else {
-				distances[this.cities[i]] = Infinity;
+				distanceList[this.cities[i]] = Infinity;
 			}
 		}
 
-		let currentCity: string | null = this.vertexWithMinDistance(distances, visited);
+		let currentCity: string | null = this.cityWithMinDistance(distanceList, visited);
 
 		while (currentCity !== null) {
-			let distance = distances[currentCity];
+			let distance = distanceList[currentCity];
 			let neighbors: { [key: string]: number } = this.adjList[currentCity];
 
 			for (let neighbor in neighbors) {
 				let newDistance = distance + neighbors[neighbor];
 
-				if (distances[neighbor] > newDistance) {
-					distances[neighbor] = newDistance;
+				if (distanceList[neighbor] > newDistance) {
+					distanceList[neighbor] = newDistance;
 				}
 			}
 
 			visited.add(currentCity);
-			currentCity = this.vertexWithMinDistance(distances, visited);
+			currentCity = this.cityWithMinDistance(distanceList, visited);
 		}
 
-		console.log(distances);
+		console.log(distanceList);
 
-		console.log(`Distance from ${from} to ${to} ${distances[to]}km`)
+		console.log(`Distance from ${from} to ${to} ${distanceList[to]}km`)
 	}
 
-	vertexWithMinDistance(distances: { [key: string]: number }, visited: Set<string>) {
+	cityWithMinDistance(distanceList: { [key: string]: number }, visited: Set<string>) {
 		let minDistance = Infinity;
 		let minVertex = null;
 
-		for (let vertex in distances) {
-			let distance = distances[vertex];
+		for (let vertex in distanceList) {
+			let distance = distanceList[vertex];
 
 			if (distance < minDistance && !visited.has(vertex)) {
 				minDistance = distance;
@@ -96,10 +106,10 @@ class Graph {
 	}
 }
 
-let g = new Graph();
+let nav = new Navigate();
 
-g.findPath('Kyiv');
-
+nav.findPath('Kyiv');
+nav.addCity('Kyiv');
 console.log('End');
 
 
